@@ -1,6 +1,6 @@
 [project]
 name = "toon-py"
-version = "1.0.0"
+version = "1.0.1"
 description = "Token-Oriented Object Notation: A compact format for passing structured data to LLMs with 30-60% fewer tokens than JSON"
 readme = "README.md"
 authors = [
