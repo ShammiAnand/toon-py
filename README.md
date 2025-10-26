@@ -21,11 +21,11 @@ LLM tokens cost money. TOON reduces token usage by:
 For standalone CLI usage:
 
 ```bash
-# Using pip
-pip install toon-py
-
-# Using uv (recommended)
+# Using uv (recommended - installs in isolated environment)
 uv tool install toon-py
+
+# Using pip (installs CLI in current Python environment)
+pip install toon-py
 ```
 
 ### As a Python library
@@ -33,11 +33,11 @@ uv tool install toon-py
 To use in your Python project:
 
 ```bash
-# Using pip
-pip install toon-py
-
-# Using uv
+# Using uv (adds to project dependencies)
 uv add toon-py
+
+# Using pip (installs library + CLI in current environment)
+pip install toon-py
 ```
 
 ## Quick Start
