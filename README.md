@@ -16,13 +16,27 @@ LLM tokens cost money. TOON reduces token usage by:
 
 ## Installation
 
+### As a CLI tool
+
+For standalone CLI usage:
+
 ```bash
+# Using pip
 pip install toon-py
+
+# Using uv (recommended)
+uv tool install toon-py
 ```
 
-Or with uv:
+### As a Python library
+
+To use in your Python project:
 
 ```bash
+# Using pip
+pip install toon-py
+
+# Using uv
 uv add toon-py
 ```
 
