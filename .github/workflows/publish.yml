@@ -1,0 +1,46 @@
+name: "Publish to PyPI"
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install Python 3.10
+        run: uv python install 3.10
+
+      - name: Run tests
+        run: uv run pytest
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install Python 3.10
+        run: uv python install 3.10
+
+      - name: Build
+        run: uv build
+
+      - name: Publish
+        run: uv publish
