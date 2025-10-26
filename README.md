@@ -1,4 +1,4 @@
-# pytoon
+# toon-py
 
 **Token-Oriented Object Notation (TOON) for Python**
 
@@ -17,13 +17,13 @@ LLM tokens cost money. TOON reduces token usage by:
 ## Installation
 
 ```bash
-pip install pytoon
+pip install toon-py
 ```
 
 Or with uv:
 
 ```bash
-uv add pytoon
+uv add toon-py
 ```
 
 ## Quick Start
@@ -31,7 +31,7 @@ uv add pytoon
 ### Python API
 
 ```python
-from pytoon import encode
+from toon_py import encode
 
 data = {
     "user": {
@@ -59,28 +59,28 @@ user:
 
 ```bash
 # From file
-pytoon data.json
+toon data.json
 
 # From stdin
-cat data.json | pytoon
+cat data.json | toon
 
 # From string
-pytoon '{"tags": ["foo", "bar"]}'
+toon '{"tags": ["foo", "bar"]}'
 
 # With options
-pytoon data.json --delimiter tab --length-marker -o output.toon
+toon data.json --delimiter tab --length-marker -o output.toon
 ```
 
 ## Token Savings
 
 | Example | JSON Tokens | TOON Tokens | Saved | Reduction |
 |---------|-------------|-------------|-------|-----------|
-| =d Simple user | 31 | 18 | 13 | **41.9%** |
-| <÷ User with tags | 48 | 28 | 20 | **41.7%** |
-| =æ Product catalog | 117 | 49 | 68 | **58.1%** |
-| =e API response | 123 | 53 | 70 | **56.9%** |
-| =Ê Analytics data | 209 | 94 | 115 | **55.0%** |
-| =È Large dataset (50 records) | 2159 | 762 | 1397 | **64.7%** |
+| Simple user | 31 | 18 | 13 | **41.9%** |
+| User with tags | 48 | 28 | 20 | **41.7%** |
+| Product catalog | 117 | 49 | 68 | **58.1%** |
+| API response | 123 | 53 | 70 | **56.9%** |
+| Analytics data | 209 | 94 | 115 | **55.0%** |
+| Large dataset (50 records) | 2159 | 762 | 1397 | **64.7%** |
 
 ## Features
 
@@ -125,7 +125,7 @@ items[2]{sku,qty,price}:
 ### Encoding Options
 
 ```python
-from pytoon import encode, EncodeOptions
+from toon_py import encode, EncodeOptions
 
 data = {"items": [{"id": 1, "name": "Widget"}]}
 
@@ -150,7 +150,7 @@ print(encode(data, options))
 ## CLI Options
 
 ```
-pytoon [INPUT] [OPTIONS]
+toon [INPUT] [OPTIONS]
 
 Arguments:
   INPUT                 JSON file, JSON string, or stdin
@@ -171,16 +171,16 @@ Keys and values are quoted only when necessary:
 
 ```python
 # Unquoted
-{"name": "hello world"}  # ’ name: hello world
+{"name": "hello world"}  # -> name: hello world
 
 # Quoted (contains comma)
-{"note": "hello, world"}  # ’ note: "hello, world"
+{"note": "hello, world"}  # -> note: "hello, world"
 
 # Quoted (looks like number)
-{"code": "123"}  # ’ code: "123"
+{"code": "123"}  # -> code: "123"
 
 # Quoted (key with space)
-{"full name": "Ada"}  # ’ "full name": Ada
+{"full name": "Ada"}  # -> "full name": Ada
 ```
 
 ### Tabular Format
@@ -208,9 +208,9 @@ users[2]{id,name,active}:
 ### Empty Containers
 
 ```python
-encode({})            # ’ (empty output)
-encode({"items": []}) # ’ items[0]:
-encode({"config": {}})# ’ config:
+encode({})            # -> (empty output)
+encode({"items": []}) # -> items[0]:
+encode({"config": {}})# -> config:
 ```
 
 ## Type Conversions
@@ -246,8 +246,8 @@ Please analyze this data...
 
 ```bash
 # Clone and setup
-git clone https://github.com/shammianand/pytoon.git
-cd pytoon
+git clone https://github.com/shammianand/toon-py.git
+cd toon-py
 uv sync --all-extras
 
 # Run tests

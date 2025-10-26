@@ -1,5 +1,5 @@
 import pytest
-from pytoon import encode
+from toon_py import encode
 
 
 def test_small_product_catalog():

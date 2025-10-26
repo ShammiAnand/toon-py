@@ -1,5 +1,5 @@
 import pytest
-from pytoon import encode, EncodeOptions
+from toon_py import encode, EncodeOptions
 
 
 def test_simple_object():
