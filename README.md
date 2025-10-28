@@ -6,6 +6,8 @@ A compact, human-readable format for passing structured data to LLMs with **30-6
 
 Python port of [@byjohann/toon](https://github.com/johannschopplich/toon).
 
+<meta http-equiv="content-type" content="text/html; charset=utf-8"><img alt="og.png" src="https://github.com/johannschopplich/toon/blob/main/.github/og.png?raw=true" data-hpc="true" class="Box-sc-62in7e-0 eLrlvS">
+
 ## Why TOON?
 
 LLM tokens cost money. TOON reduces token usage by:
@@ -86,15 +88,40 @@ toon data.json --delimiter tab --length-marker -o output.toon
 ```
 
 ## Token Savings
+> [!NOTE]
+> Measured with [`gpt-tokenizer`](https://github.com/niieani/gpt-tokenizer) using `o200k_base` encoding (used by GPT-5 and other modern models). Savings will vary across models and tokenizers.
 
-| Example | JSON Tokens | TOON Tokens | Saved | Reduction |
-|---------|-------------|-------------|-------|-----------|
-| Simple user | 31 | 18 | 13 | **41.9%** |
-| User with tags | 48 | 28 | 20 | **41.7%** |
-| Product catalog | 117 | 49 | 68 | **58.1%** |
-| API response | 123 | 53 | 70 | **56.9%** |
-| Analytics data | 209 | 94 | 115 | **55.0%** |
-| Large dataset (50 records) | 2159 | 762 | 1397 | **64.7%** |
+<!-- automd:file src="./benchmarks/results/accuracy/report.md" -->
+
+### Retrieval Accuracy
+
+Accuracy across **3 LLMs** on **159 data retrieval questions**:
+
+```
+gpt-5-nano
+  toon         ████████████████████  99.4% (158/159)
+  yaml         ███████████████████░  95.0% (151/159)
+  csv          ██████████████████░░  92.5% (147/159)
+  json         ██████████████████░░  92.5% (147/159)
+  xml          ██████████████████░░  91.2% (145/159)
+
+claude-haiku-4-5
+  toon         ███████████████░░░░░  75.5% (120/159)
+  xml          ███████████████░░░░░  75.5% (120/159)
+  csv          ███████████████░░░░░  75.5% (120/159)
+  json         ███████████████░░░░░  75.5% (120/159)
+  yaml         ███████████████░░░░░  74.2% (118/159)
+
+gemini-2.5-flash
+  xml          ██████████████████░░  91.8% (146/159)
+  csv          █████████████████░░░  86.2% (137/159)
+  toon         █████████████████░░░  84.9% (135/159)
+  json         ████████████████░░░░  81.8% (130/159)
+  yaml         ████████████████░░░░  78.6% (125/159)
+```
+
+**Advantage:** TOON achieves **86.6% accuracy** (vs JSON's 83.2%) while using **46.3% fewer tokens**.
+
 
 ## Features
 
